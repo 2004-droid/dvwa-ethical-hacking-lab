@@ -15,7 +15,7 @@ Penetration test conducted against DVWA (Damn Vulnerable Web Application) in an 
 - Identified target at 192.168.56.101
 - Tool: `nmap -sn 192.168.56.0/24`
 
-![Ping Sweep](screenshots/01-reconnaissance/ping_sweep.png)
+![Ping Sweep](screenshots/reconnaissance/ping_sweep.jpeg)
 
 ### Phase 2 — Scanning & Enumeration
 - Full port scan with service and version detection
@@ -24,7 +24,8 @@ Penetration test conducted against DVWA (Damn Vulnerable Web Application) in an 
 - Discovered: Apache, MySQL, FTP, SSH, Telnet, Samba
 - Tool: `nmap -sV -sC -A -O`
 
-![Nmap Scan](screenshots/02-scanning/nmap_services.png)
+![Nmap Scan](screenshots/scanning/nmap_services.jpeg)
+![Nmap Vuln](screenshots/scanning/nmap_vuln.jpeg)
 
 ### Phase 3 — Network Traffic Capture (ARP Poisoning MITM)
 - Performed ARP poisoning between victim (192.168.56.101) and gateway (192.168.56.1)
@@ -32,45 +33,44 @@ Penetration test conducted against DVWA (Damn Vulnerable Web Application) in an 
 - Captured plaintext HTTP login credentials via Wireshark
 - Tools: `arpspoof`, `Wireshark`
 
-![ARP Poisoning](screenshots/03-arp-poisoning/arpspoof_terminals.png)
-![Captured Credentials](screenshots/03-arp-poisoning/wireshark_credentials.png)
+![ARP Poisoning](screenshots/arp-posioning/arpspoof_terminal.jpeg)
+![Captured Credentials](screenshots/arp-posioning/wireshark_credential.jpeg)
 
 ### Phase 4 — Exploitation
 
 #### SQL Injection
 - Manually injected payload to dump all database users
 - Extracted MD5 password hashes using UNION attack
-- Tool: Browser
 
-![SQL Injection](screenshots/04-exploitation/sqli_user_dump.png)
-![Hash Dump](screenshots/04-exploitation/sqli_hash_dump.png)
+![SQL User Dump](screenshots/exploitation/sqli_user_dump.jpeg)
+![SQL Hash Dump](screenshots/exploitation/sqli_hash_dump.jpeg)
 
 #### Cross-Site Scripting (XSS)
 - Reflected XSS: injected script executed in browser
 - Stored XSS: persistent script saved in database
 
-![XSS Reflected](screenshots/04-exploitation/xss_reflected.png)
-![XSS Stored](screenshots/04-exploitation/xss_stored.png)
+![XSS Reflected](screenshots/exploitation/xss_reflected.jpeg)
+![XSS Stored](screenshots/exploitation/xss_stored.jpeg)
 
 #### Command Injection
 - Injected OS commands through web form
 - Read sensitive system file /etc/passwd
 
-![Command Injection](screenshots/04-exploitation/command_injection.png)
+![Command Injection](screenshots/exploitation/command_injection.jpeg)
 
 #### Brute Force
 - Automated password attack using Hydra
 - Found 16 valid passwords for admin account
 - Tool: `Hydra` + `rockyou.txt`
 
-![Brute Force](screenshots/04-exploitation/hydra_brute_force.png)
+![Brute Force](screenshots/exploitation/hydra_brute_force.jpeg)
 
 ### Phase 5 — Post Exploitation
 - Cracked all stolen MD5 hashes using John the Ripper
 - Recovered plaintext passwords for all users
 - Tool: `john` + `rockyou.txt`
 
-![Hash Cracking](screenshots/05-post-exploitation/john_hash_cracking.png)
+![Hash Cracking](screenshots/post-exploitation/john_hash_cracking.jpeg)
 
 ## Vulnerabilities Found
 
